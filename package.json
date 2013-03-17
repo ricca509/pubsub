@@ -1,0 +1,19 @@
+{
+  "name": "pubsub",
+  "version": "0.0.0",
+  "description": "My attempt at a very tiny Pub/Sub pattern implementation",
+  "main": "pubsub.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "keywords": [
+    "pubsub"
+  ],
+  "author": "Riccardo Coppola <riccardo@riccardocoppola.com",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.3.0"
+  }
+}
