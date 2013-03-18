@@ -1,25 +1,3 @@
-/*
-var obj = {};
-
-obj.speak = function(lang) {
-    console.log("I'm speaking " + lang);
-};
-
-obj = pubSub.extend(obj);
-
-var key = obj.subscribe("test", function(args) {
-    console.log('Test called with: ' + args);
-});
-
-obj.publish("test", [12, 13, 14]);
-
-obj.speak('ita');
-
-console.log(obj.unsubscribe("test", key));
-
-obj.publish("test", [12, 13, 14]);
-*/
-
 module("pubsub");
 
 test("Extend test", 4, function() {
