@@ -3,10 +3,10 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            all: ['Gruntfile.js', '*.js']
+            all: ['Gruntfile.js', '*.js', 'tests/*.js']
         },
         qunit: {
-			all: ['tests.html']
+			all: ['tests/tests.html']
 		}
     });
 
