@@ -1,6 +1,5 @@
 var pubSub = (function() {
-    "use strict";
-    // Privates
+    "use strict";    
 
     // Callbacks bucket
     var calls = {};
@@ -11,25 +10,28 @@ var pubSub = (function() {
         }
 
         for (var i = 0; i < calls[topic].length; i++) {
-            var call = calls[topic][i];
-            if (typeof(call) === 'function') {
-                call.call(null, args);
+            var callback = calls[topic][i];
+            if (typeof(callback) === 'function') {
+                callback.call(null, args);
             }
         }
     };
 
-    var subscribe = function(topic, call) {
+    var subscribe = function(topic, callback) {
+        if(topic.trim().length === 0) {
+            return false;
+        }
         if(!calls[topic]) {
             calls[topic] = [];
         }
 
-        return calls[topic].push(call);
+        return calls[topic].push(callback);
     };
 
     var unsubscribe = function(topic, index) {
         index = index - 1;
-        if (!calls[topic][index]) {
-            return;
+        if (!calls[topic] || !calls[topic][index]) {
+            return false;
         }
 
         calls[topic].splice(index, 1);
@@ -45,7 +47,7 @@ var pubSub = (function() {
         return obj;
     };
 
-    // Publics
+    // Public API
     return {
         extend: extend
     };
