@@ -23,11 +23,12 @@ pubsub.unsubscribe("test", key);
 ```
 
 **Tests**
+
 There is a grunt file to run QUnit tests and Hinting.
 
 ```javascript
-grunt qunit
-grunt jshint
+$ grunt qunit
+$ grunt jshint
 ```
 
 **Tools used**
