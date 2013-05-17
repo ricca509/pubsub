@@ -1,57 +1,45 @@
-var pubSub = (function() {
-    "use strict";    
+"use strict"; 
 
+var PubSub = function() {      
     // Callbacks bucket
-    var calls = {};
+    this.calls = {};
+};
 
-    var publish = function(topic, args) {
-        if(!calls[topic]) {
-            return;
+PubSub.prototype.publish = function(topic, args) {
+    if(!this.calls[topic]) {
+        return;
+    }
+
+    for (var i = 0; i < this.calls[topic].length; i++) {
+        var callback = this.calls[topic][i];
+        if (typeof(callback) === 'function') {
+            callback.call(null, args);
         }
+    }
+};
 
-        for (var i = 0; i < calls[topic].length; i++) {
-            var callback = calls[topic][i];
-            if (typeof(callback) === 'function') {
-                callback.call(null, args);
-            }
-        }
-    };
+PubSub.prototype.subscribe = function(topic, callback) {
+    if(topic.trim().length === 0) {
+        return false;
+    }
+    if(!this.calls[topic]) {
+        this.calls[topic] = [];
+    }
 
-    var subscribe = function(topic, callback) {
-        if(topic.trim().length === 0) {
-            return false;
-        }
-        if(!calls[topic]) {
-            calls[topic] = [];
-        }
+    return this.calls[topic].push(callback);
+};
 
-        return calls[topic].push(callback);
-    };
+PubSub.prototype.unsubscribe = function(topic, index) {
+    index = index - 1;
+    if (!this.calls[topic] || !this.calls[topic][index]) {
+        return false;
+    }
 
-    var unsubscribe = function(topic, index) {
-        index = index - 1;
-        if (!calls[topic] || !calls[topic][index]) {
-            return false;
-        }
+    this.calls[topic].splice(index, 1);
 
-        calls[topic].splice(index, 1);
+    return true;
+};
 
-        return true;
-    };
-
-    var extend = function(obj) {
-        obj.publish = publish;
-        obj.subscribe = subscribe;
-        obj.unsubscribe = unsubscribe;
-
-        return obj;
-    };
-
-    // Public API
-    return {
-        extend: extend
-    };
-})();
 
 
 
