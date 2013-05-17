@@ -4,7 +4,13 @@
 
 A simple and tiny Javascript implementation of the Publisher/Subscriber pattern.
 
-**Usage**
+**Getting it**
+
+```
+git clone --depth=1 https://github.com/ricca509/pubsub.git
+```
+
+**Using it**
 
 ```javascript
 var pubsub = new PubSub();
@@ -22,7 +28,7 @@ pubsub.publish("test", ["one", "two"]);
 pubsub.unsubscribe("test", key);
 ```
 
-**Tests**
+**Testing it**
 
 There is a grunt file to run QUnit tests and Hinting.
 
