@@ -31,6 +31,12 @@ $ grunt qunit
 $ grunt jshint
 ```
 
+or, easier
+
+```javascript
+$ npm test
+```
+
 **Tools used**
 
 * [Grunt](http://gruntjs.com/)
