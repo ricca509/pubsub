@@ -2,12 +2,12 @@ module("pubsub");
 
 var pubsub = new PubSub();
 
-test("Subscribe test", 2, function() {    
-    key = pubsub.subscribe("test", function(args) {
+test("Subscribe test", 2, function() {
+    key = pubsub.on("test", function(args) {
         console.log('Test ' + args);
     });
 
-    key2 = pubsub.subscribe("", function(args) {
+    key2 = pubsub.on("", function(args) {
         console.log('Test ' + args);
     });
 
@@ -16,19 +16,19 @@ test("Subscribe test", 2, function() {
 });
 
 test("Publish test", 1, function() {
-    key = pubsub.subscribe("test", function(args) {
+    key = pubsub.on("test", function(args) {
         ok(true, 'Test callback gets called with: ' + args);
     });
 
-    pubsub.publish("test", ["one", "two"]);
+    pubsub.trigger("test", ["one", "two"]);
 });
 
-test("Unsubscribe test", 3, function() {      
-    key = pubsub.subscribe("test", function(args) {
+test("Unsubscribe test", 3, function() {
+    key = pubsub.on("test", function(args) {
         console.log('Test called with: ' + args);
     });
 
-    ok(pubsub.unsubscribe("test", key), "Unsubscribe ok");
-    ok(pubsub.unsubscribe("", key) === false, "Unsubscribe from non-existent event should fail");
-    ok(pubsub.unsubscribe("test", 7) === false, "Unsubscribe from non-existent callback key should fail");
+    ok(pubsub.off("test", key), "Unsubscribe ok");
+    ok(pubsub.off("", key) === false, "Unsubscribe from non-existent event should fail");
+    ok(pubsub.off("test", 7) === false, "Unsubscribe from non-existent callback key should fail");
 });

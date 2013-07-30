@@ -1,12 +1,12 @@
 var PubSub = (function() {
-    "use strict"; 
+    "use strict";
 
-    var Module = function() {      
+    var Module = function() {
         // Callbacks bucket
         this.calls = {};
     };
 
-    Module.prototype.publish = function(topic, args) {
+    Module.prototype.trigger = function(topic, args) {
         if(!this.calls[topic]) {
             return;
         }
@@ -19,7 +19,7 @@ var PubSub = (function() {
         }
     };
 
-    Module.prototype.subscribe = function(topic, callback) {
+    Module.prototype.on = function(topic, callback) {
         if(topic.trim().length === 0) {
             return false;
         }
@@ -30,7 +30,7 @@ var PubSub = (function() {
         return this.calls[topic].push(callback);
     };
 
-    Module.prototype.unsubscribe = function(topic, index) {
+    Module.prototype.off = function(topic, index) {
         index = index - 1;
         if (!this.calls[topic] || !this.calls[topic][index]) {
             return false;

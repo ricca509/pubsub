@@ -17,15 +17,15 @@ var pubsub = new PubSub();
 
 // Subscribe to event (creates the event if it does not exist) and get
 // subscription key
-var key = pubsub.subscribe("test", function(args) {
+var key = pubsub.on("test", function(args) {
 	console.log('Test ' + args);
 });
 
 // Publish event "test" with an array of values
-pubsub.publish("test", ["one", "two"]);
+pubsub.trigger("test", ["one", "two"]);
 
 // Unscribe from the event with your key
-pubsub.unsubscribe("test", key);
+pubsub.off("test", key);
 ```
 
 **Testing it**
